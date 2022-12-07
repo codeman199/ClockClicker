@@ -1,0 +1,139 @@
+body {
+  font-family: "Open Sans";
+  height: 100%;
+  margin: 0;
+}
+
+.clicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4f3f22;
+  height: 50%;
+}
+
+.clicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.waitArea {
+  font-size: 24px;
+  text-align: center;
+
+  background: #4f3f22;
+  border-radius: 8px;
+  opacity: .8;
+  padding: 30px;
+}
+
+.waitButton {
+  background-image: url("images/clock.png");
+  background-size: cover;
+  height: 150px;
+  width: 150px;
+
+  background-color: #4f3f22;
+  border: none;
+  outline: none;
+}
+
+.units {
+  overflow: auto;
+  background: #fdf6e3;
+  height: 50%;
+}
+
+.unit {
+  display: flex;
+
+  padding: 10px 20px;
+  margin: 10px;
+  border: 3px solid #002b36;
+  border-radius: 14px;
+  width: 800px;
+  height: 75px;
+}
+
+.numUnits {
+  align-self: center;
+  font-size: 24px;
+}
+
+.unitBuyButton {
+  align-self: center;
+  background: none;
+  border: 2px solid #859900;
+  border-radius: 8px;
+  color: #859900;
+  font-size: 20px;
+  height: 30px;
+  width: 80px;
+}
+
+.unitTitle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.unitTitleText {
+  font-weight: bold;
+}
+
+.unitText {
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.unitContribution {
+  font-size: 12px;
+  padding: 10px 0px;
+}
+
+
+.upgrades {
+  overflow: auto;
+  background: #fdf6e3;
+  height: 50%;
+}
+
+.upgrade {
+  display: flex;
+
+  padding: 10px 20px;
+  margin: 10px;
+  border: 3px solid #002b36;
+  border-radius: 14px;
+  width: 600px;
+  height: 30px;
+}
+
+.upgradeTitleText {
+  align-self: center;
+  font-weight: bold;
+}
+
+.upgradeText {
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.upgradeText {
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.upgradeBuyButton {
+  align-self: center;
+  background: none;
+  border: 2px solid #859900;
+  border-radius: 8px;
+  color: #859900;
+  font-size: 20px;
+  height: 30px;
+  width: 80px;
+}

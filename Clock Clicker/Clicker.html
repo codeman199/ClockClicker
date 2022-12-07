@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="ClickerStyle.css">
+</head>
+
+<div class="clicker">
+  <div class="waitArea">
+    <h1>Clock Clicker</h1>
+    <div class="time" id="time" value="0">0 seconds</div><br>
+    <button class="waitButton" onclick="buttonClick()"></button>
+  </div>
+</div>
+
+<div class="units">
+  <div class="unit" id="sundials">
+    <div class="numUnits" id = "numSundials">0</div>
+    <div class="unitText">
+      <div class="unitTitle">
+        <div class="unitTitleText">Sundials</div>
+        <div class="unitTitleCost" id="sundialsCost">5 seconds</div>
+      </div>
+      <div class="UnitDescription">Use shadows to keep time.</div>
+      <div class="unitContribution" id="sundialsContribution"> Producing 0 seconds per tick</div>
+    </div>
+    <button class="unitBuyButton" onclick="buySundial()">Buy</button>
+  </div>
+
+  <div class="unit" id="hourglasses">
+    <div class="numUnits" id = "numHourglasses">0</div>
+    <div class="unitText">
+      <div class="unitTitle">
+        <div class="unitTitleText">Hourglasses</div>
+        <div class="unitTitleCost" id="hourglassesCost">3 minutes</div>
+      </div>
+      <div class="UnitDescription">Flip an hourglass and watch time pour.</div>
+      <div class="unitContribution" id="hourglassesContribution">Producing 0 seconds per tick</div>
+    </div>
+    <button class="unitBuyButton" onclick="buyHourglass()">Buy</button>
+  </div>
+
+  <div class="unit" id="mechanicalClocks">
+    <div class="numUnits" id = "numMechanicalClocks">0</div>
+    <div class="unitText">
+      <div class="unitTitle">
+        <div class="unitTitleText">Mechanical Clocks</div>
+        <div class="unitTitleCost" id="mechanicalClocksCost">1 hour</div>
+      </div>
+      <div class="UnitDescription">Now we're counting with mechanics.</div>
+      <div class="unitContribution" id="mechanicalClocksContribution">Producing 0 seconds per tick</div>
+    </div>
+    <button class="unitBuyButton" onclick="buyMechanicalClock()">Buy</button>
+  </div>
+
+  <div class="unit" id="pocketWatches">
+    <div class="numUnits" id = "numPocketWatches">0</div>
+    <div class="unitText">
+      <div class="unitTitle">
+        <div class="unitTitleText">Pocket Watches</div>
+        <div class="unitTitleCost" id="pocketWatchesCost">1 day</div>
+      </div>
+      <div class="UnitDescription">Time is in your hands.</div>
+      <div class="unitContribution" id="pocketWatchesContribution">Producing 0 seconds per tick</div>
+    </div>
+    <button class="unitBuyButton" onclick="buyPocketWatch()">Buy</button>
+  </div>
+
+  <div class="unit" id="grandfatherClocks">
+    <div class="numUnits" id = "numGrandfatherClocks">0</div>
+    <div class="unitText">
+      <div class="unitTitle">
+        <div class="unitTitleText">Grandfather Clocks</div>
+        <div class="unitTitleCost" id="grandfatherClocksCost">1 week</div>
+      </div>
+      <div class="UnitDescription">This looks expensive!</div>
+      <div class="unitContribution" id="grandfatherClocksContribution">Producing 0 seconds per tick</div>
+    </div>
+    <button class="unitBuyButton" onclick="buyGrandfatherClock()">Buy</button>
+  </div>
+
+  <div class="unit" id="timeMachines">
+    <div class="numUnits" id = "numTimeMachines">0</div>
+    <div class="unitText">
+      <div class="unitTitle">
+        <div class="unitTitleText">Time Machines</div>
+        <div class="unitTitleCost" id="timeMachinesCost">1 month</div>
+      </div>
+      <div class="UnitDescription">TO THE FUTURE!</div>
+      <div class="unitContribution" id="timeMachinesContribution">Producing 0 seconds per tick</div>
+    </div>
+    <button class="unitBuyButton" onclick="buyTimeMachine()">Buy</button>
+  </div>
+</div>
+
+<div class="upgrades">
+  <div class="upgrade" id="patience">
+    <div class="upgradeTitleText">Patience</div>
+    <div class="upgradeText">
+      <div class="upgradeDescription">Multiplies waiting by 1.5x per hourglass</div>
+      <div class="upgradeCost">1 hour</div> 
+    </div>
+    <button class="upgradeBuyButton" onclick="buyPatience()">Buy</button>
+  </div>
+  <div class="upgrade" id="extraShadowySundials">
+    <div class="upgradeTitleText">Extra Shadowy Sundials</div>
+    <div class="upgradeText">
+      <div class="upgradeDescription">Boosts Sundials by 50x</div>
+      <div class="upgradeCost">3 days</div> 
+    </div>
+    <button class="upgradeBuyButton" onclick="buyExtraShadowySundials()">Buy</button>
+  </div>
+  <div class="upgrade" id="wristWatches">
+    <div class="upgradeTitleText">Wrist Watches</div>
+    <div class="upgradeText">
+      <div class="upgradeDescription">Boosts Pocket Watches by 3x</div>
+      <div class="upgradeCost">1 week</div> 
+    </div>
+    <button class="upgradeBuyButton" onclick="buyWristWatches()">Buy</button>
+  </div>
+  <div class="upgrade" id="patience2">
+    <div class="upgradeTitleText">Patience 2</div>
+    <div class="upgradeText">
+      <div class="upgradeDescription">Multiplies waiting by 1.5x per Pocket Watch</div>
+      <div class="upgradeCost">1 month</div> 
+    </div>
+    <button class="upgradeBuyButton" onclick="buyPatience2()">Buy</button>
+  </div><br>
+</div>
+</body>
+
+<script>
+    //TIME INCREMENTS
+    const second = 1;
+    const minute = second*60;
+    const hour = minute*60;
+    const day = hour*24;
+    const week = day*7;
+    const month = week*4;
+    const year = month*12;
+    const decade = year*10;
+    const century = decade*10;
+    const millennium = century*10;
+
+    //GAME RULES
+    var started = false;
+    var time = 0;
+    var waitTime = second;
+    var timeIncrement = 0;
+    var priceHike = 1.05;
+    var tickVal = 1000;
+
+    //COSTS COUNTS AND CONTRIBUTIONS
+    var sundialsCost = 5;
+    var numSundials = 0;
+    var sundialsIncrement = 1;
+
+    var hourglassesCost = 3*minute;
+    var numHourglasses = 0;
+    var hourglassesIncrement = 10*second;
+
+    var mechanicalClocksCost = 3600;
+    var numMechanicalClocks = 0;
+    var mechanicalClocksIncrement = 5*minute;
+
+    var pocketWatchesCost = day;
+    var numPocketWatches = 0;
+    var pocketWatchesIncrement = (10*minute) + (10*second);
+
+    var grandfatherClocksCost = 3600*24*7;
+    var numGrandfatherClocks = 0;
+    var grandfatherClocksIncrement = 4*hour;
+
+    var timeMachinesCost = month;
+    var numTimeMachines = 0;
+    var timeMachinesIncrement = day;
+
+    var smartWatchesCost;
+    var patience = 0;
+    //Updates time when wait button is pressed based on waitTime value, starts game if first time being pressed
+    function buttonClick() {
+      var tempWaitTime = waitTime;
+
+      if (patience == 1) {
+              tempWaitTime = tempWaitTime *  Math.ceil(1.5 * numHourglasses);
+      }
+
+      if (patience2 == 1) {
+              tempWaitTime = tempWaitTime * Math.ceil(1.5 * numPocketWatches);
+      }
+
+      time = time + tempWaitTime;
+      document.getElementById('time').innerHTML = updateTimeDisplay(time);
+      if (started == false) {
+        started = true;
+        setInterval(updateTime, tickVal);
+      }
+    }
+
+    //Purchases a sundial and adjusts pricing and contribution value
+    function buySundial() {
+        if(time >= sundialsCost) {
+            time = time - sundialsCost;
+            document.getElementById('time').innerHTML = updateTimeDisplay(time);
+            numSundials++;
+            sundialsCost = Math.ceil(sundialsCost * priceHike);
+            document.getElementById('numSundials').innerHTML
+                = numSundials;
+            document.getElementById('sundialsCost').innerHTML
+                = updateTimeDisplay(sundialsCost);
+            document.getElementById('sundialsContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numSundials * sundialsIncrement) + ' per tick';
+        }
+    }
+
+    //Purchases an hourglass and adjusts pricing and contribution value
+    function buyHourglass() {
+        if(time >= hourglassesCost) {
+            time = time - hourglassesCost;
+            document.getElementById('time').innerHTML = updateTimeDisplay(time);
+            numHourglasses++;
+            hourglassesCost = Math.ceil(hourglassesCost * priceHike);
+            document.getElementById('numHourglasses').innerHTML
+                = numHourglasses;
+            document.getElementById('hourglassesCost').innerHTML
+                = updateTimeDisplay(hourglassesCost);
+            document.getElementById('hourglassesContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numHourglasses * hourglassesIncrement) + ' per tick';
+ 
+        }
+    }
+
+    //Purchases a mechanical clock and adjusts pricing and contribution value
+    function buyMechanicalClock() {
+        if(time >= mechanicalClocksCost) {
+            time = time - mechanicalClocksCost;
+            document.getElementById('time').innerHTML = updateTimeDisplay(time);
+            numMechanicalClocks++;
+            mechanicalClocksCost = Math.ceil(mechanicalClocksCost * priceHike);
+            document.getElementById('numMechanicalClocks').innerHTML
+                = numMechanicalClocks;
+            document.getElementById('mechanicalClocksCost').innerHTML
+                = updateTimeDisplay(mechanicalClocksCost);
+            document.getElementById('mechanicalClocksContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numMechanicalClocks * mechanicalClocksIncrement) + ' per tick';
+        }
+    }
+
+    //Purchases a pocket watch and adjusts pricing and contribution value
+    function buyPocketWatch() {
+        if(time >= pocketWatchesCost) {
+            time = time - pocketWatchesCost;
+            document.getElementById('time').innerHTML = updateTimeDisplay(time);
+            numPocketWatches++;
+            pocketWatchesCost = Math.ceil(pocketWatchesCost * priceHike);
+            document.getElementById('numPocketWatches').innerHTML
+                = numPocketWatches;
+            document.getElementById('pocketWatchesCost').innerHTML
+                = updateTimeDisplay(pocketWatchesCost);
+            document.getElementById('pocketWatchesContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numPocketWatches * pocketWatchesIncrement) + ' per tick';
+ 
+        }
+    }
+
+    //Purchases a grandfather clock and adjusts pricing and contribution value
+    function buyGrandfatherClock() {
+        if(time >= grandfatherClocksCost) {
+            time = time - grandfatherClocksCost;
+            document.getElementById('time').innerHTML = updateTimeDisplay(time);
+            numGrandfatherClocks++;
+            grandfatherClocksCost = Math.ceil(grandfatherClocksCost * priceHike);
+            document.getElementById('numGrandfatherClocks').innerHTML
+                = numGrandfatherClocks;
+            document.getElementById('grandfatherClocksCost').innerHTML
+                = updateTimeDisplay(grandfatherClocksCost);
+            document.getElementById('grandfatherClocksContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numGrandfatherClocks * grandfatherClocksIncrement) + ' per tick';
+ 
+        }
+    }
+
+    //Purchases a time machine and adjusts pricing and contribution value
+    function buyTimeMachine() {
+        if(time >= timeMachinesCost) {
+            time = time - timeMachinesCost;
+            document.getElementById('time').innerHTML = updateTimeDisplay(time);
+            numTimeMachines++;
+            timeMachinesCost = Math.ceil(timeMachinesCost * priceHike);
+            document.getElementById('numTimeMachines').innerHTML
+                = numTimeMachines;
+            document.getElementById('timeMachinesCost').innerHTML
+                = updateTimeDisplay(timeMachinesCost);
+            document.getElementById('timeMachinesContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numTimeMachines * timeMachinesIncrement) + ' per tick';
+ 
+        }
+    }
+
+    //Passes in a value and translates it so that every number is equilvalent to 1 second, displays up to millenniums
+    function updateTimeDisplay(toUpdate) {
+      var displayTime = '';
+      var stringTime = toUpdate;
+      
+      //MILLENNIUM SECTION
+      if(stringTime >= 86400*7*4*12*10*10*10)
+      {
+        if(toUpdate < 86400*7*4*12*10*10*10 * 2 || Math.floor(stringTime/(86400*7*4*12*10*10*10)) == 1) {
+          displayTime = displayTime + Math.floor(stringTime/(86400*7*4*12*10*10*10)) + ' millennium ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/(86400*7*4*12*10*10*10)) + ' millenniums ';
+        }
+      }
+
+      stringTime = stringTime%(86400*7*4*12*10*10*10);
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= millennium && !(stringTime < century) && stringTime%century == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //CENTURY SECTION
+      if(stringTime >= century)
+      {
+        if(toUpdate < century * 2 || Math.floor(stringTime/(century)) == 1) {
+          displayTime = displayTime + Math.floor(stringTime/(century)) + ' century ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/(century)) + ' centuries ';
+        }
+      }
+
+      stringTime = stringTime%(century);
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= century && !(stringTime < decade) && stringTime%decade == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //DECADE SECTION
+      if(stringTime >= decade)
+      {
+        if(toUpdate < decade * 2 || Math.floor(stringTime/(decade)) == 1) {
+          displayTime = displayTime + Math.floor(stringTime/(decade)) + ' decade ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/(decade)) + ' decades ';
+        }
+      }
+      
+      stringTime = stringTime%(decade);
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= decade && !(stringTime < year) && stringTime%year == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //YEAR SECTION
+      if(stringTime >= year)
+      {
+        if(toUpdate < year * 2 || Math.floor(stringTime/(year)) == 1) {
+          displayTime = displayTime + Math.floor(stringTime/(year)) + ' year ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/(year)) + ' years ';
+        }
+      }
+      
+      stringTime = stringTime%(year);
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= year && !(stringTime < month) && stringTime%month == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //MONTH SECTION
+      if(stringTime >= 86400*7*4)
+      {
+        if(toUpdate < month * 2 || Math.floor(stringTime/(month)) == 1) {
+          displayTime = displayTime + Math.floor(stringTime/(month)) + ' month ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/(month)) + ' months ';
+        }
+      }
+      
+      stringTime = stringTime%(month);
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= month && !(stringTime < week) && stringTime%week == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //WEEK SECTION
+      if(stringTime >= week)
+      {
+        if(toUpdate < week * 2 || Math.floor(stringTime/(week)) == 1) {
+          displayTime = displayTime + Math.floor(stringTime/(week)) + ' week ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/(week)) + ' weeks ';
+        }
+      }
+      
+      stringTime = stringTime%(week);
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= week && !(stringTime < day) && stringTime%day == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //DAY SECTION
+      if(stringTime > day)
+      {
+        if(toUpdate < (day * 2) || Math.floor(stringTime/day) == 1) {
+          displayTime = displayTime + Math.floor(stringTime/day) + ' day ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/day) + ' days ';
+        }
+      }
+      
+      stringTime = stringTime%day;
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= day && !(stringTime < hour) && stringTime%hour == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //HOUR SECTION
+      if(stringTime >=  hour) {
+        if(toUpdate < hour*2 || Math.floor(stringTime/hour) == 1)
+        {
+          displayTime = displayTime + Math.floor(stringTime/hour) + ' hour ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/hour) + ' hours ';
+        }
+      }
+
+      stringTime = stringTime%hour;
+      
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if(toUpdate >= hour && !(stringTime < minute) && stringTime%minute == 0 && toUpdate != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //MINUTE SECTION
+      if(stringTime >= minute) {
+        if(toUpdate < minute*2 || Math.floor(stringTime/minute) == 1)
+        {
+          displayTime = displayTime + Math.floor(stringTime/minute) + ' minute ';
+        } else {
+          displayTime = displayTime + Math.floor(stringTime/minute) + ' minutes ';
+        }
+      }
+      
+      stringTime = stringTime%minute;
+
+      if(stringTime == 0 && toUpdate != 0)
+      {
+        return displayTime;
+      }
+
+      if (toUpdate > minute && stringTime != 0)
+      {
+        displayTime = displayTime + 'and ';
+      }
+
+      //SECOND SECTION
+      if(stringTime == second || Math.floor(stringTime/second) == 1) {
+        displayTime = displayTime + stringTime + ' second';
+      } else if ((stringTime != 0 && toUpdate != 0) || toUpdate == 0) {
+        displayTime = displayTime + stringTime  + ' seconds';
+      }
+
+      return displayTime;
+    }
+
+    //Updates the player's current time based on the purchased time keepers
+    function updateTime() {
+      timeIncrement = (numSundials * sundialsIncrement) + (numHourglasses * hourglassesIncrement) + 
+      (numMechanicalClocks * mechanicalClocksIncrement) + (numPocketWatches * pocketWatchesIncrement) +
+      (numGrandfatherClocks * grandfatherClocksIncrement) + (numTimeMachines * timeMachinesIncrement);
+
+      time = time + timeIncrement;
+      document.getElementById('time').innerHTML = updateTimeDisplay(time);
+    }
+
+    //Upgrades
+    function buyExtraShadowySundials() {
+      if(time >= day) {
+        document.getElementById("extraShadowySundials").style.display = "none";
+        sundialsIncrement = sundialsIncrement*50;
+        time = time - day;
+        document.getElementById('time').innerHTML = updateTimeDisplay(time);
+        document.getElementById('sundialsContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numSundials * sundialsIncrement) + ' per tick';
+      }
+    }
+
+    function buyPatience() {
+      if(time >= hour) {
+        document.getElementById("patience").style.display = "none";
+        patience = 1;
+        time = time - hour;
+        document.getElementById('time').innerHTML = updateTimeDisplay(time);
+      }
+    }
+
+    function buyPatience2() {
+      if(time >= month) {
+        document.getElementById("patience2").style.display = "none";
+        patience2 = 1;
+        time = time - month;
+        document.getElementById('time').innerHTML = updateTimeDisplay(time);
+      }
+    }
+
+    function buyWristWatches() {
+      if(time >= week) {
+        document.getElementById("wristWatches").style.display = "none";
+        pocketWatchesIncrement = pocketWatchesIncrement*3;
+        time = time - week;
+        document.getElementById('time').innerHTML = updateTimeDisplay(time);
+        document.getElementById('pocketWatchesContribution').innerHTML
+                = 'Producing ' + updateTimeDisplay(numPocketWatches * pocketWatchesIncrement) + ' per tick';
+      }
+    }
+</script>
+
+</body>
+</html>
